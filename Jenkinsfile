@@ -19,12 +19,11 @@ steps{
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         }
 }
-stage('Build') {
-    steps {
-        sh "docker build -t ${DOCKERHUB_CREDENTIALS_USR}/books:${BUILD_ID} ${WORKSPACE}"
-    }
+stage('Build'){
+steps {
+sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID .'
 }
-
+}
 stage('Deliver'){
 steps {
 sh 'docker push $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID'
