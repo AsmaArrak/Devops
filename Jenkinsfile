@@ -19,16 +19,18 @@ steps{
 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 }
 }
-stage('Build'){
-steps {
-sh 'sudo docker build -t $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID .'
+stage('Build') {
+    steps {
+        sh "docker build -t asmaarrak/books:latest ."
+    }
 }
+
+stage('Deliver') {
+    steps {
+        sh "docker push asmaarrak/books:latest"
+    }
 }
-stage('Deliver'){
-steps {
-sh 'docker push $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID'
-}
-}
+
 stage('Cleanup'){
 steps {
 sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID'
