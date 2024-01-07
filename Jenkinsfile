@@ -16,14 +16,15 @@ checkout scm
 stage('Init'){
 steps{
 // Permet l'authentification
-sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        }
 }
+stage('Build') {
+    steps {
+        sh "docker build -t ${DOCKERHUB_CREDENTIALS_USR}/books:${BUILD_ID} ${WORKSPACE}"
+    }
 }
-stage('Build'){
-steps {
-sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID .'
-}
-}
+
 stage('Deliver'){
 steps {
 sh 'docker push $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID'
