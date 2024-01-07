@@ -26,7 +26,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker build -t asmaarrak/books:latest .'
+                // Assuming Dockerfile is in the 'routes' folder
+                sh 'docker build -t asmaarrak/books:latest -f routes/Dockerfile .'
             }
         }
 
