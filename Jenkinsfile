@@ -21,9 +21,10 @@ sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR
 }
 stage('Build') {
     steps {
-        sh "docker build -t asmaarrak/books:latest ."
+        sh "docker build -t asmaarrak/books:latest /absolute/path/to/Dockerfile"
     }
 }
+
 
 stage('Deliver') {
     steps {
