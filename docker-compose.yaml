@@ -1,0 +1,11 @@
+version: '3'
+services:
+  service-app:
+    container_name: books
+    build: './'
+    image: asmaarrak/books:gke-mysql
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+    restart: on-failure
