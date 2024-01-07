@@ -6,7 +6,7 @@ pipeline {
     }
 
     triggers {
-        pollSCM('*/5 * * * *') // Vérifier toutes les 5 minutes
+        pollSCM('*/5 * * * *') 
     }
 
     stages {
@@ -19,15 +19,13 @@ pipeline {
 
         stage('Init') {
             steps {
-                // Permet l'authentification
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
             }
         }
 
         stage('Build') {
          steps {
-        // Assuming Dockerfile is in the 'routes' folder
-        sh 'docker build -t asmaarrak/books:latest -f /var/lib/jenkins/workspace/bookspipeline/Dockerfile /var/lib/jenkins/workspace/bookspipeline'
+        sh 'docker build -t asmaarrak/books:latest .'
          }
 }
 
