@@ -25,11 +25,12 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                // Assuming Dockerfile is in the 'routes' folder
-                sh 'docker build -t asmaarrak/books:latest -f routes/Dockerfile .'
-            }
-        }
+         steps {
+        // Assuming Dockerfile is in the 'routes' folder
+        sh 'docker build -t asmaarrak/books:latest -f /var/lib/jenkins/workspace/bookspipeline/Dockerfile /var/lib/jenkins/workspace/bookspipeline'
+         }
+}
+
 
         stage('Deliver') {
             steps {
