@@ -19,9 +19,18 @@ steps{
 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 }
 }
+stage('Print Workspace') {
+    steps {
+        script {
+            def currentWorkspace = pwd()
+            echo "Current Workspace: ${currentWorkspace}"
+        }
+    }
+}
+
 stage('Build') {
     steps {
-        sh "docker build -t asmaarrak/books:latest -f ./Dockerfile ."
+        sh "docker build -t asmaarrak/books:latest ."
     }
 }
 
