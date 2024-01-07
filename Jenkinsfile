@@ -21,7 +21,7 @@ sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR
 }
 stage('Build'){
 steps {
-sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID .'
+sh 'sudo docker build -t $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID .'
 }
 }
 stage('Deliver'){
