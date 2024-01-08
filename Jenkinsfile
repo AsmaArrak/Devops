@@ -25,8 +25,7 @@ pipeline {
 
         stage('Build') {
          steps {
-        sh 'docker build -t asmaarrak/books:latest .'
-         }
+         sh "docker build --build-arg asmaarrak/books -t ${imageName} ."         }
 }
 
 
