@@ -37,7 +37,7 @@ pipeline {
 
         stage('Cleanup') {
             steps {
-                sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID'
+                sh 'docker rmi asmaarrak/books:$BUILD_ID'
                 sh 'docker logout'
             }
         }
