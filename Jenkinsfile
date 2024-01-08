@@ -25,8 +25,8 @@ pipeline {
 
         stage('Build') {
          steps {
-         sh "docker build --build-arg asmaarrak/books -t ${imageName} ."      
-        sh "docker tag ${imageName} ${DOCKERHUB_CREDENTIALS_USR}/${imageName}:latest"
+         sh "docker build --build-arg asmaarrak/books -t books ."      
+         sh "docker tag books ${DOCKERHUB_CREDENTIALS_USR}/books:latest"
 
           }
         }
@@ -34,13 +34,13 @@ pipeline {
 
         stage('Deliver') {
             steps {
-        sh "docker push ${DOCKERHUB_CREDENTIALS_USR }/${imageName}:latest"
+        sh "docker push ${DOCKERHUB_CREDENTIALS_USR}/books:latest"
             }
         }
 
         stage('Cleanup') {
             steps {
-                sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID'
+                sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/books:latest'
                 sh 'docker logout'
             }
         }
