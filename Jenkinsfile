@@ -25,13 +25,14 @@ pipeline {
 
         stage('Build') {
          steps {
-         sh "docker build --build-arg asmaarrak/books -t ${imageName} ."         }
-}
+         sh "docker build --build-arg asmaarrak/books -t ${imageName}:$BUILD_ID ."        
+          }
+        }
 
 
         stage('Deliver') {
             steps {
-                sh 'docker push asmaarrak/books:latest'
+                sh 'docker push asmaarrak/books:$BUILD_ID'
             }
         }
 
