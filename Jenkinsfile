@@ -1,10 +1,5 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'DOCKER_HUB_USERNAME', defaultValue: 'asmaarrak', description: 'Docker Hub Username')
-        string(name: 'IMAGE_NAME', defaultValue: 'books', description: 'Docker Image Name')
-
-    }
 
     environment {
         DOCKERHUB_CREDENTIALS = credentials('c997079f-276d-4b33-bcd9-f0e9d78ed439')
@@ -42,7 +37,7 @@ pipeline {
 
         stage('Cleanup') {
             steps {
-                sh 'docker rmi asmaarrak/books:latest'
+                sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/books:$BUILD_ID'
                 sh 'docker logout'
             }
         }
